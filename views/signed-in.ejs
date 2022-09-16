@@ -1,2 +1,22 @@
+<!-- quotes homepage -->
+<!-- function to append quote to text box -->
+
 <h1>Youre signed in</h1>
-<h1><%= responde.data %> </h1>
+<h1><%= response.data %> </h1>
+<button class="btn btn-primary" type="submit">Add To Journal</button>
+
+<h2>Journal:</h2>
+<div class="journal">
+  <form method="POST" action="./quote/signed-in/">
+      <input date="date" type="text" placeholder="Date">
+      <input subject="subject" type="text" placeholder="Subject">
+       <textarea type="text-area" class="form-control" id="content" name="content"> </textarea>
+      <button onclick="addQuote()" class="btn btn-primary" type="submit">Add Entry</button>
+  </form>
+</div>
+<script>
+  function addQuote(){
+     document.getElementById("content")=response.data.content;}
+</script>
+
+<a href="/show/">Past Entries</a>

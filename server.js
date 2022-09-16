@@ -43,6 +43,7 @@ app.get('/', (req, res) => {
 })
 
 //access to all of our auth routes GET/auth/signup POST routes
+app.use('/quote',require('./controllers/quote'));
 app.use('/auth', require('./controllers/auth'));
 
 // Add this above /auth controllers
@@ -51,17 +52,6 @@ app.get('/profile', isLoggedIn, (req, res) => {
   res.render('profile', { id, name, email });
 });
 
-
-app.post('/signed-in', (req, res) => {
-  axios.get(`'https://motivational-quotes1.p.rapidapi.com/motivation${API_KEY}`)
-  .then(response => {
-    console.log(response.data);
-    res.render('signed-in',{quote:  response.data});
-  })
-  .catch(error=>{
-    console.log(error);
-  });
-});
 
 
 const PORT = process.env.PORT || 3000;
