@@ -5,7 +5,7 @@
 <div id="quoteDiv">
   <h1 id="quoteSection"><%= response.data %> </h1>
 </div>
-<button id="quoteButton"  class="btn btn-primary" type="submit">Add To Journal</button>
+<button id="quoteButton" onclick="addQuote()" on class="btn btn-primary" type="submit">Add To Journal</button>
 
 <h2>Journal:</h2>
 <div class="journal">
@@ -14,26 +14,23 @@
       <input subject="subject" type="text" placeholder="Subject">
        <textarea type="text-area" class="form-control" id="content" name="content"> </textarea>
       <button class="btn btn-primary" type="submit">Add Entry</button>
+      <button class="btn btn-primary" type="submit">Open New Page</button>
   </form>
 </div>
 
 <script>
-// const quoteSection = document.getElementById('quoteSection');{
-// quoteButton.addEventListener('click', function addQuote() {
-//   quoteSection.value+= response.data.content;
- 
+
     function addQuote(){
     const quoteSection = document.getElementById('quoteSection');
     const content =document.getElementById('content');//text area
     const quoteDiv=document.getElementById('quoteDiv');
-    // quoteSection.innerHTML.content+= content.innerHTML.value;
-   content.value += response.data;
-    // content.appendChild(response.data);
-  }
-  quoteButton = document.getElementById('quoteButton');
- quoteButton.addEventListener('click',addQuote);
-</script>
+    quoteButton = document.getElementById('quoteButton');
 
+  quoteButton.addEventListener('click',addQuote);
+  content.value += quoteSection.textContent;
+
+  }
+</script>
 
 
 <a href="/show/">Past Entries</a>

@@ -12,7 +12,10 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       models.journal.belongsTo(models.user)
     }
-  }
+    getJournal() {
+      return this.subject + this.date + this.quote
+    }
+  };
   journal.init({
     subject: DataTypes.STRING,
     date: DataTypes.STRING,

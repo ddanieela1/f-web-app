@@ -4,12 +4,8 @@
 <h2>Past Entries:</h2>
 
 
-<!-- <div class="journal">
-  <form method="POST" action="./signed-in/show">
-      <input date="date" type="text" placeholder="Date">
-      <input subject="subject" type="text" placeholder="Subject">
-       <textarea type="text" class="form-control" id="content" name="content"></textarea>
-      <button class="btn btn-primary" type="submit">Add Entry</button>
-  </form>
-</div> -->
-
+<select name="journalId" id="journal" class="past-entries" required>
+  <% journals.forEach(function(journal) { %>
+    <option value="<%= journal.id %>"><%= journal.getJournal() %></option>
+  <% }) %>
+</select>
