@@ -4,8 +4,14 @@
 <h2>Past Entries:</h2>
 
 
-<select name="journalId" id="journal" class="past-entries" required>
+<ul>
   <% journals.forEach(function(journal) { %>
-    <option value="<%= journal.id %>"><%= journal.getJournal() %></option>
+    <li> <a href="./journal/<%= journal.id %>"><%= journal.subject %></a></li>
+    <li><%= journal.entry %> </li>
+    
+    
   <% }) %>
-</select>
+  </ul>
+  <!-- subject: DataTypes.STRING,
+  quote: DataTypes.STRING,
+  userId: DataTypes.INTEGER, -->

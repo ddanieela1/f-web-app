@@ -34,36 +34,17 @@ const db = require('../models');
 router.get('/show',(req, res) => {
   db.journal.findAll()
   .then((journals) => {
-    res.render('/show', { journals: journal })
+    res.render('show', { journals: journals})
   })
   .catch((error) => {
     res.render('signed-in');
   })
 })
 
-  
-  
-// router.get('/signed-in/:id',(req, res) => {
-//   console.log(req.params)
-//   const options = {
-//     method: 'POST',
-//     url: 'https://motivational-quotes1.p.rapidapi.com/motivation',
-//     headers: {
-//       'content-type': 'application/json',
-//       'X-RapidAPI-Key': process.env.API_KEY,
-//       'X-RapidAPI-Host': 'motivational-quotes1.p.rapidapi.com'
-//     },
-//     data: '{"key1":"value","key2":"value"}',
-//   }
-//   axios.request(`https://motivational-quotes1.p.rapidapi.com/motivation`)
-//   .then(response =>{
-//     console.log(response.data);
-//     res.render('/show', {quote: {response}});//response.data
-//   })
-//   .catch(error=>{
-//     console.log(error);
-//     res.redirect('/auth/signed-in');
-//   });
-// });
+
+//open journal in a new page for a bigger view
+router.get('/journal',(req, res) => {
+    res.render('/journal')
+  });
 
 module.exports = router;

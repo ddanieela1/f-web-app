@@ -7,7 +7,8 @@ async function createUser() {
     try {
         const newUser = await db.user.create({
             name: "My Name",
-            email: "myemail@gmail.com"
+            email: "myemail@gmail.com",
+            password:'password'
         });
         console.log('my new user >>>', newUser);
     } catch (error) {
@@ -16,7 +17,7 @@ async function createUser() {
     
 }
 // @todo run createUser function below
-
+createUser();
 // READ
 // find one user
 async function findOneUser() {
