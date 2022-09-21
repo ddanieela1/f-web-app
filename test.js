@@ -27,3 +27,10 @@ async function createEntry() {
 }
 
 createEntry()
+
+<ul>
+  <% journals.forEach(function(journal) { %>
+    <li> <a href="./journal/<%= journal.id %>"><%= journal.subject %></a></li>
+    <li><%= journal.entry %> </li>
+  <% }) %>
+  </ul>

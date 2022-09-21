@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       models.journal.belongsTo(models.user)
     }
     getJournal() {
-      return this.subject + this.quote + this.entry + this.userId
+      return this.subject
     }
   };
   journal.init({

@@ -1,17 +1,45 @@
 <!-- shows past entries -->
 
+<h1><%= journal.subject %> <small>by <%= journal.userId %></small></h1>
+
+<p>
+  <strong><%= moment(journal.createdAt).calendar() %></strong>
+</p>
+
+<p><%= journal.entry %></p>
+
+
+<hr/>
+
+<div>
+  <form action="/journals/<%= journal.id %>" method="POST">
+    <div class="form-group">
+      <label for="comment">Subject</label>
+      <input type="text" id="subject" name="subject">
+      <label for="entry">entry</label>
+      <textarea rows="4" cols="50" class="form-control" id="comment" name="entry" required></textarea>
+    </div>
+  
+    <input type="submit" class="btn btn-primary">
+  </form>
+</div>
+
+
+<p><%= journal.content %></p>
+<%journal.forEach((journal)=>{%>
+  <p><%=journal.content%></p>
+<%})%>  
+
+<a href="/signed-in">&larr; Back Home</a>
+
 
 <h2>Past Entries:</h2>
 
-
-<ul>
-  <% journals.forEach(function(journal) { %>
-    <li> <a href="./journal/<%= journal.id %>"><%= journal.subject %></a></li>
-    <li><%= journal.entry %> </li>
-    
-    
-  <% }) %>
-  </ul>
-  <!-- subject: DataTypes.STRING,
-  quote: DataTypes.STRING,
-  userId: DataTypes.INTEGER, -->
+<% journals.forEach(function(j) { %>
+  <div class="well">
+    <h2>
+      <a href="/journals/<%= j.id %>"><%= j.subject %></a>
+      <small><%= j.entry %> </small>
+    </h2>
+  </div>
+<% }) %>

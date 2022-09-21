@@ -1,6 +1,23 @@
 
 <h1>New Entry:</h1>
 
-<input subject="subject" type="text" placeholder="Subject">
+<!-- <input subject="subject" type="text" placeholder="Subject">
        <textarea type="text-area" class="form-control" id="content" name="content"> </textarea>
-      <button class="btn btn-primary" type="submit">Add Entry</button>
+      <button class="btn btn-primary" type="submit">Add Entry</button> -->
+
+<form action="/show" method="POST">
+       <div class="form-group">
+         <label for="subject">Subject</label>
+         <input type="text" class="form-control" id="subject" name="subject" required>
+       </div>
+
+     
+       <div class="form-group">
+         <label for="entry">Entry</label>
+         <textarea rows="4" cols="50" type="text" class="form-control" id="entry" name="entry" required></textarea>
+       </div>
+     
+       <input type="submit" class="btn btn-primary">
+</form>
+
+<a href="./signed-in">Back to home</a>

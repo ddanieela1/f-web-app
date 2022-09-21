@@ -44,7 +44,37 @@ router.get('/show',(req, res) => {
 
 //open journal in a new page for a bigger view
 router.get('/journal',(req, res) => {
-    res.render('/journal')
+    res.render('./journal')
   });
+
+
+ //post one individual entry
+ router.post(':id',(req, res) => {
+  db.journal.create({
+    userId: req.user.id,
+    subject: req.body.subject
+  })
+  .then((post)=>{
+    res.redirect(`${req.params.id}`)//or '/show' route
+  })
+  .catch((error) => {
+    res.render('./show')
+  });
+ });  
+
+
+router.get('/journal/:id',(req, res) => {
+  db.journal.findOne({
+    where: {id: req.params.id},
+    include:[db.userId,db.subject,db.entry,db.quote]
+  })
+  .then((journals) => {
+    res.render('show', { journals: journals})
+  })
+  .catch((error) => {
+    res.render('signed-in');
+  })
+})
+
 
 module.exports = router;
