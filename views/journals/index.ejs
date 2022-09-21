@@ -1,0 +1,15 @@
+
+
+<a href="/signed-in">&larr; Back Home</a>
+
+
+<h2>Past Entries:</h2>
+
+<% journals.forEach(function(j) { %>
+  <div class="well">
+    <h2>
+      <a href="/journals/<%= j.id %>"><%= j.subject %></a>
+      <small><%= j.entry %> </small>
+    </h2>
+  </div>
+<% }) %>

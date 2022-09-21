@@ -4,7 +4,6 @@ const layouts = require('express-ejs-layouts');
 const app = express();
 const session = require('express-session');
 const flash = require('connect-flash');
-const { response } = require('express');
 const passport = require('./config/ppConfig');
 const isLoggedIn = require('./middleware/isLoggedIn');
 const axios = require('axios');
@@ -33,7 +32,7 @@ app.use(passport.session());         // Add a session
 app.use((req,res,next)=>{
   console.log('res locals >>>', res.locals) //.local is an object inside of the .res, key value of res object
   //res.local allowes to store data and use data
-  res.locals.alerts =req.flash();
+  res.locals.alerts = req.flash();
   res.locals.currentUser = req.user;
   next();
 });
@@ -43,7 +42,7 @@ app.get('/', (req, res) => {
 })
 
 //access to all of our auth routes GET/auth/signup POST routes
-app.use('/quote',require('./controllers/quote'));
+app.use('/journals', isLoggedIn, require('./controllers/journals'));
 app.use('/auth', require('./controllers/auth'));
 
 // Add this above /auth controllers
