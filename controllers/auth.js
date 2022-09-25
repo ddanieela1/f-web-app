@@ -23,34 +23,9 @@ router.get('/logout', (req, res) => {
 });
 
 
-
-
-// router.get('/signed-in/show',(req, res) => {
-//   console.log(req.params)
-//   const options = {
-//     method: 'POST',
-//     url: 'https://motivational-quotes1.p.rapidapi.com/motivation',
-//     headers: {
-//       'content-type': 'application/json',
-//       'X-RapidAPI-Key': process.env.API_KEY,
-//       'X-RapidAPI-Host': 'motivational-quotes1.p.rapidapi.com'
-//     },
-//     data: '{"key1":"value","key2":"value"}',
-//   }
-//   axios.request(`https://motivational-quotes1.p.rapidapi.com/motivation`)
-//   .then(response =>{
-//     console.log(response.data);
-//     res.render('show', {quote: {response}});//response.data
-//   })
-//   .catch(error=>{
-//     console.log(error);
-//     res.redirect('/auth/signed-in');
-//   });
-// });
-
 //---------------------------------------------------------------------------------------------------
 router.post('/login', passport.authenticate('local', {
-  successRedirect: '/',
+  successRedirect: '/journals/signed-in',
   failureRedirect: '/auth/login',
   successFlash: 'Welcome back ...',
   failureFlash: 'Either email or password is incorrect' 
@@ -89,31 +64,6 @@ router.post('/signup', async (req, res) => {
         res.redirect('/auth/signup');
   }
 });
-
-
-
-// router.get('/signed-in', (req, res) => {
-//   const data = req.params
-//   const options = {
-//     method: 'POST',
-//     url: 'https://motivational-quotes1.p.rapidapi.com/motivation',
-//     headers: {
-//       'content-type': 'application/json',
-//       'X-RapidAPI-Key': process.env.API_KEY,
-//       'X-RapidAPI-Host': 'motivational-quotes1.p.rapidapi.com'
-//     },
-//     data: '{"key1":"value","key2":"value"}',
-//   }
-//   axios.request(options)
-//   .then(response => {
-//     console.log(response.data);
-//     res.render('signed-in', {response});
-//   })
-//   .catch(error=>{
-//     console.log(error);
-//     res.redirect('/auth/login');
-//   });
-// });
 
 
 

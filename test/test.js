@@ -1,4 +1,4 @@
-const db = require('./models')
+const db = require('../models')
 
 // async function dbTest() {
 //   const journal = await db.journal.create({
@@ -26,5 +26,15 @@ async function createEntry() {
   
 }
 
-createEntry()
+// createEntry()
 
+async function findAllJournals() {
+  try {
+      const journals = await db.journal.findAll();
+      console.log('all users here >>>', journals);  
+  } catch (error) {
+      console.log('did not find all users because of >>>', error);
+  }
+}
+
+findAllJournals()

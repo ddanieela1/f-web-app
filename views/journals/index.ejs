@@ -1,15 +1,32 @@
 
 
-<a href="/signed-in">&larr; Back Home</a>
+<a href="/journals/signed-in">&larr; Back Home</a>
 
 
 <h2>Past Entries:</h2>
 
 <% journals.forEach(function(j) { %>
-  <div class="well">
-    <h2>
+  
+    <div>
+    
       <a href="/journals/<%= j.id %>"><%= j.subject %></a>
+    
+    <h3>
       <small><%= j.entry %> </small>
-    </h2>
-  </div>
-<% }) %>
+    </h3>
+    </div>
+      <form method="POST" action="/journals/<%=j.id%>?_method=DELETE">
+        <button type="submit" class="btn btn-primary">Delete</button>
+      </form> 
+    <a href="/journals/edit/<%= j.id %> ">Edit</a>
+
+    <form action="/journals/favorites" method="POST">
+      <input type="text" value="<%= j.subject%>"
+      <input type="text" value="<%= j.quote %>"
+      <input type="text" value="<%= j.entry %>" 
+      <button type="submit" class="btn btn-primary">Add to Favorites</button>
+    </form> 
+  
+  <% }) %>
+
+

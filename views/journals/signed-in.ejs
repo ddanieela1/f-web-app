@@ -1,0 +1,40 @@
+<!-- quotes homepage -->
+<!-- function to append quote to text box -->
+
+<h1>Youre signed in</h1>
+<div id="quoteDiv">
+  <h1 id="quoteSection">
+    <%= response.data %>
+  </h1>
+
+<button id="quoteButton" onclick="addQuote()" on class="btn btn-primary" type="submit">
+  Add To Journal
+</button>
+</div>
+<h2>Journal:</h2>
+<div class="journal">
+  <form action="/journals/new" method="POST">
+    <input name="subject" type="text" placeholder="Subject" />
+    <textarea rows="4" cols="50" type="text-area" class="form-control" id="content" name="entry">
+    </textarea>
+    <!-- <a href="./show/">Past Entries</a> -->
+    <input type="submit" class="btn btn-primary" />
+    <a href="/journals/new">Open New Page</a>
+    <!-- <button class="btn btn-primary" type="submit">Add Entry</button> -->
+    <!-- <button class="btn btn-primary" type="submit">Open New Page</button> -->
+  </form>
+</div>
+
+<script>
+  function addQuote() {
+    const quoteSection = document.getElementById("quoteSection");
+    const content = document.getElementById("content"); //text area
+    const quoteDiv = document.getElementById("quoteDiv");
+    quoteButton = document.getElementById("quoteButton");
+
+    quoteButton.addEventListener("click", addQuote);
+    content.value += quoteSection.textContent;
+  }
+</script>
+
+<a href="/journals">Past Entries</a>

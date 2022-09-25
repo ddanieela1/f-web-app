@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src = 'test-widget.js'></script>
+</head>
+<body>
+    <div id="demo-mobile-month-view"></div>
+</body>
+</html>
+
+
+
+
+<!-- save quote button -->
+<div>
+    <form method="POST" action="/journals/quotes">
+      <value="<%= joursnals.quote %>" name = "quote">
+      <button class="btn btn-primary" type="button">Save Quote</button>
+    </form>
+</div>
+
+
+<% let deleteRoute = "/journals/<%=j.id%>?_method=DELETE" %> 
+<form method="POST" action="<%= deleteRoute %>">
+  <button type="submit" class="btn btn-primary">Delete</button>
+</form> 
+
+router.delete('/:id', async (req, res) => {
+  let quoteDeleted = await db.journal.update({quote:""},{
+      where: { id: req.params.id }
+  });
+  res.redirect('/journals');
+});
+
+ 
+<form method="POST" action="/journals/<%=j.id%>?_method=DELETE">
+  <button type="submit" class="btn btn-primary">Delete</button>
+</form> 
+
+
+
+const favEntry = await.db.journal.create({
+  userId: req.user.id,
+  subject: req.body.subject,
+  entry: req.body.entry
+})
+.then((post) => {
+  res.redirect("/journals/favorites"); //or '/show' route
+})
+.catch((error) => {
+  res.render("/journals");
+});
+});

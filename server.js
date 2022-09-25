@@ -7,6 +7,8 @@ const flash = require('connect-flash');
 const passport = require('./config/ppConfig');
 const isLoggedIn = require('./middleware/isLoggedIn');
 const axios = require('axios');
+const methodOverride = require('method-override');
+const db = ("./models")
 
 const SECRET_SESSION = process.env.SECRET_SESSION;
 console.log('hi',SECRET_SESSION);
@@ -14,6 +16,7 @@ console.log('hi',SECRET_SESSION);
 app.set('view engine', 'ejs');
 
 app.use(require('morgan')('dev'));
+app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
 app.use(layouts);//ejs layouts
@@ -41,9 +44,38 @@ app.get('/', (req, res) => {
   res.render('index');
 })
 
+app.get('/profile/edit', isLoggedIn, (req, res) => {
+  res.render('edit');
+});
+
+app.put('/profile/:id', isLoggedIn, async (req, res) => {
+  try {
+    const usersUpdated = await db.user.update({
+      email: req.body.email,
+      name: req.body.name
+    }, {
+      where: {
+        id: req.params.id
+      }
+  });
+
+  console.log('********** PUT ROUTE *************');
+  console.log('Users updated', usersUpdated);
+  console.log('***********************');
+
+  // redirect back to the profile page
+  res.redirect('/profile'); // route
+  } catch (error) {
+    console.log('*********************ERROR***********************');
+    console.log(error);
+    console.log('**************************************************');
+    res.render('edit');
+  }
+});
+
 //access to all of our auth routes GET/auth/signup POST routes
-app.use('/journals', isLoggedIn, require('./controllers/journals'));
 app.use('/auth', require('./controllers/auth'));
+app.use('/journals', isLoggedIn, require('./controllers/journals'));
 
 // Add this above /auth controllers
 app.get('/profile', isLoggedIn, (req, res) => {
