@@ -49,6 +49,26 @@ router.get("/favorites", (req, res) => {
   });
 });
 
+//open journal in a new page for a bigger view
+router.get("/new", (req, res) => {
+  res.render("journals/new");
+});
+
+//edit
+router.get("/edit/:id", (req, res) => {
+  db.journal
+    .findOne({
+      where: { id: req.params.id },
+    })
+    .then((journal) => {
+      res.render("journals/edit", { journal: journal, userId: req.user.id });
+    })
+    .catch((error) => {
+      console.log("error", error);
+      res.redirect("/journals");
+    });
+});
+
 //post favorite entry
 router.post("/favorites", async (req, res) => {
 const favJournal= db.journal
@@ -62,9 +82,18 @@ const favJournal= db.journal
     res.redirect('/favorites');
 });
 
-//open journal in a new page for a bigger view
-router.get("/new", (req, res) => {
-  res.render("journals/new");
+router.get("/:id", (req, res) => {
+  db.journal
+    .findOne({
+      where: { id: req.params.id },
+      include: [db.user],
+    })
+    .then((journals) => {
+      res.render("journals/show", { journals });
+    })
+    .catch((error) => {
+      res.render("journals/signed-in");
+    });
 });
 
 //post one individual entry
@@ -99,20 +128,6 @@ router.post("/signed-in", (req, res) => {
     });
 });
 
-//edit
-router.get("/edit/:id", (req, res) => {
-  db.journal
-    .findOne({
-      where: { id: req.params.id },
-    })
-    .then((journal) => {
-      res.render("journals/edit", { journal: journal, userId: req.user.id });
-    })
-    .catch((error) => {
-      console.log("error", error);
-      res.redirect("/journals");
-    });
-});
 
 router.put("/:id", async (req, res) => {
   try {
@@ -135,19 +150,6 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-router.get("/:id", (req, res) => {
-  db.journal
-    .findOne({
-      where: { id: req.params.id },
-      include: [db.user],
-    })
-    .then((journals) => {
-      res.render("journals/show", { journals });
-    })
-    .catch((error) => {
-      res.render("journals/signed-in");
-    });
-});
 
 //delete
 router.delete("/:id", async (req, res) => {
