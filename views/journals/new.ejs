@@ -1,51 +1,66 @@
-<h1>New Entry:</h1>
-
-<!-- <input subject="subject" type="text" placeholder="Subject">
-       <textarea type="text-area" class="form-control" id="content" name="content"> </textarea>
-      <button class="btn btn-primary" type="submit">Add Entry</button> -->
-
-<form action="/journals/new" method="POST">
-  <div class="form-group">
-    <label for="subject">Subject</label>
-    <input type="text" class="form-control" id="subject" name="subject" required />
-  </div>
-
-  <div class="form-group">
-    <label for="entry">Entry</label>
-    <textarea rows="4" cols="50" type="text" class="form-control" id="entry" name="entry" required></textarea>
-  </div>
-
-  <input type="submit" class="btn btn-primary" />
-</form>
-
-
-<a href="./signed-in">Back to home</a>
-
-<!-- image upload -->
-<input type="file" id="image-upload" name="image-upload" accept="image/png, image/jpg, image/pdf" />
-<img src="imgPreview" src="" alt="preview"
-<div id="display-image"></div>
-
-
-<script>
-  const image_upload = document.querySelector('#image-upload');
-  // let uploaded_image = "";
-
-image_upload.addEventListener("change", function(){
-    // console.log(image_input.value);
-    const reader = new FileReader();
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
   
-    reader.addEventListener("load", ()=>{
-      localStorage.setItem("new-image", reader.result);
-        // uploaded_image = reader.result;
-        // document.querySelector("#display-image").style.backgroundImage = `url(${uploaded_image})`
-    })
-    reader.readAsDataURL(this.files[0]);
-})
-document.addEventListener("DOMContentLoaded",()=>{
-  const newImgUrl = localStorage.getItem("new-image");
-  if(newImgUrl){
-    document.querySelector("#imgPreview").setAttributes("src", newImgUrl);
-  }
-});
-</script>
+  </html>
+  <h1>New Entry:</h1>
+  
+  <link rel="stylesheet" href="../assets/css/new.css">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- <input subject="subject" type="text" placeholder="Subject">
+         <textarea type="text-area" class="form-control" id="content" name="content"> </textarea>
+        <button class="btn btn-primary" type="submit">Add Entry</button> -->
+  
+  <form action="/journals/new" method="POST">
+    <div class="form-group">
+      <label for="subject">Subject</label>
+      <input type="text" class="form-control" id="subject" name="subject" required />
+    </div>
+  
+    <div class="form-group">
+      <label for="entry">Entry</label>
+      <textarea rows="4" cols="50" type="text" class="form-control" id="entry" name="entry" required></textarea>
+    </div>
+  
+    <input type="submit" class="btn btn-primary" />
+  </form>
+  
+  
+  <a href="./signed-in">Back to home</a>
+  
+  <!-- image upload -->
+  <input type="file" id="image-upload" name="image-upload" accept="image/png, image/jpg, image/pdf" />
+  <img src="imgPreview" src="" alt="preview"
+  <div id="display-image"></div>
+  
+  
+  <script>
+    const image_upload = document.querySelector('#image-upload');
+    // let uploaded_image = "";
+  
+  image_upload.addEventListener("change", function(){
+      // console.log(image_input.value);
+      const reader = new FileReader();
+    
+      reader.addEventListener("load", ()=>{
+        localStorage.setItem("new-image", reader.result);
+          // uploaded_image = reader.result;
+          // document.querySelector("#display-image").style.backgroundImage = `url(${uploaded_image})`
+      })
+      reader.readAsDataURL(this.files[0]);
+  })
+  document.addEventListener("DOMContentLoaded",()=>{
+    const newImgUrl = localStorage.getItem("new-image");
+    if(newImgUrl){
+      document.querySelector("#imgPreview").setAttributes("src", newImgUrl);
+    }
+  });
+  </script>
+</body>

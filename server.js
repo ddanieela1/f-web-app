@@ -11,7 +11,7 @@ const methodOverride = require('method-override');
 const db = ("./models")
 
 const SECRET_SESSION = process.env.SECRET_SESSION;
-console.log('hi',SECRET_SESSION);
+console.log('hi', SECRET_SESSION);
 
 app.set('view engine', 'ejs');
 
@@ -19,7 +19,7 @@ app.use(require('morgan')('dev'));
 app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
-app.use(layouts);//ejs layouts
+app.use(layouts);
 
 //line 19-34 will run for each route
 app.use(session({
@@ -32,7 +32,7 @@ app.use(flash());            // flash middleware
 app.use(passport.initialize());      // Initialize passport
 app.use(passport.session());         // Add a session
 
-app.use((req,res,next)=>{
+app.use((req, res, next) => {
   console.log('res locals >>>', res.locals) //.local is an object inside of the .res, key value of res object
   //res.local allowes to store data and use data
   res.locals.alerts = req.flash();
@@ -57,14 +57,14 @@ app.put('/profile/:id', isLoggedIn, async (req, res) => {
       where: {
         id: req.params.id
       }
-  });
+    });
 
-  console.log('********** PUT ROUTE *************');
-  console.log('Users updated', usersUpdated);
-  console.log('***********************');
+    console.log('********** PUT ROUTE *************');
+    console.log('Users updated', usersUpdated);
+    console.log('***********************');
 
-  // redirect back to the profile page
-  res.redirect('/profile'); // route
+    // redirect back to the profile page
+    res.redirect('/profile'); // route
   } catch (error) {
     console.log('*********************ERROR***********************');
     console.log(error);
@@ -79,7 +79,7 @@ app.use('/journals', isLoggedIn, require('./controllers/journals'));
 
 // Add this above /auth controllers
 app.get('/profile', isLoggedIn, (req, res) => {
-  const { id, name, email } = req.user.get(); 
+  const { id, name, email } = req.user.get();
   res.render('profile', { id, name, email });
 });
 

@@ -35,7 +35,6 @@ router.get("/", (req, res) => {
   db.journal
     .findAll()
     .then((journals) => {
-      console.log("journals", journals);
       res.render("journals/index", { journals: journals });
     })
     .catch((error) => {
@@ -44,33 +43,23 @@ router.get("/", (req, res) => {
 });
 
 //list of favorite entries
-router.get('/favorites', (req, res) => {
-  db.journal
-    .findAll()
-    .then((journals) => {
-      console.log("journals", journals);
-      res.render("journals/index", { journals: journals });
-    })
-    .catch((error) => {
-      res.render("journals/signed-in");
-    });
+router.get("/favorites", (req, res) => {
+  db.journal.findAll().then((journals) => {
+    res.render("journals/favorites", { journals: journals });
+  });
 });
 
 //post favorite entry
-router.post("/favorites", (req, res) => {
-  console.log(req.body)
-  db.journal
+router.post("/favorites", async (req, res) => {
+const favJournal= db.journal
     .create({
-      userId: req.user.id,
       subject: req.body.subject,
-      entry: req.body.entry
-    })
-    .then((post) => {
-      res.redirect("/journals/favorites"); //or '/show' route
-    })
-    .catch((error) => {
-      res.render("/journals");
+      quote: req.body.quote,
+      entry: req.body.entry,
+      userId: req.user.id
     });
+    // res.redirect to all favorite songs
+    res.redirect('/favorites');
 });
 
 //open journal in a new page for a bigger view
@@ -80,12 +69,12 @@ router.get("/new", (req, res) => {
 
 //post one individual entry
 router.post("/new", (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
   db.journal
     .create({
       userId: req.user.id,
       subject: req.body.subject,
-      entry: req.body.entry
+      entry: req.body.entry,
     })
     .then((post) => {
       res.redirect("/journals"); //or '/show' route
@@ -100,50 +89,51 @@ router.post("/signed-in", (req, res) => {
     .create({
       userId: req.user.id,
       subject: req.body.subject,
-      entry: req.body.entry
+      entry: req.body.entry,
     })
     .then((post) => {
-      res.redirect("/journals"); 
+      res.redirect("/journals");
     })
     .catch((error) => {
       res.render("journals/signed");
     });
 });
 
-
-//edit 
-router.get('/edit/:id', (req, res) => {
-  db.journal.findOne({
-    where: { id: req.params.id }
-  })
-  .then(journal => {
-     res.render('journals/edit', { journal: journal, userId: req.user.id })
-  })
-  .catch(error => {
-     console.log('error', error);
-     res.redirect('/journals');
-  });
-});
-
-
-router.put('/:id', async(req, res) => {
-  try {
-    const numRowsUpdated = await db.journal.update({
-        subject: req.body.subject,
-        entry: req.body.entry
-    }, {
-        where: {
-            id: req.params.id
-        }
+//edit
+router.get("/edit/:id", (req, res) => {
+  db.journal
+    .findOne({
+      where: { id: req.params.id },
+    })
+    .then((journal) => {
+      res.render("journals/edit", { journal: journal, userId: req.user.id });
+    })
+    .catch((error) => {
+      console.log("error", error);
+      res.redirect("/journals");
     });
-    console.log('number of journals updated should be 1', numRowsUpdated);
-    res.redirect(`/journals/${req.params.id}`);
-} catch (error) {
-    console.log('did not update user(s) because of >>>', error);
-    res.redirect(`/journals/${req.params.id}`);
-}
 });
-  
+
+router.put("/:id", async (req, res) => {
+  try {
+    const numRowsUpdated = await db.journal.update(
+      {
+        subject: req.body.subject,
+        entry: req.body.entry,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+    console.log("number of journals updated should be 1", numRowsUpdated);
+    res.redirect(`/journals/${req.params.id}`);
+  } catch (error) {
+    console.log("did not update user(s) because of >>>", error);
+    res.redirect(`/journals/${req.params.id}`);
+  }
+});
 
 router.get("/:id", (req, res) => {
   db.journal
@@ -152,7 +142,7 @@ router.get("/:id", (req, res) => {
       include: [db.user],
     })
     .then((journals) => {
-      res.render("journals/show", {journals});
+      res.render("journals/show", { journals });
     })
     .catch((error) => {
       res.render("journals/signed-in");
@@ -160,12 +150,11 @@ router.get("/:id", (req, res) => {
 });
 
 //delete
-router.delete('/:id', async (req, res) => {
+router.delete("/:id", async (req, res) => {
   let quoteDeleted = await db.journal.destroy({
-      where: { id: req.params.id }
+    where: { id: req.params.id },
   });
-  res.redirect('/journals');
+  res.redirect("/journals");
 });
-
 
 module.exports = router;

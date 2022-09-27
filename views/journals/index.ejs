@@ -1,32 +1,71 @@
 
-
-<a href="/journals/signed-in">&larr; Back Home</a>
-
-
-<h2>Past Entries:</h2>
-
-<% journals.forEach(function(j) { %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <link rel="stylesheet" href="../assets/css/signed-in.css">
+  <link rel="stylesheet" href="style.css">
   
-    <div>
+  <a href="/journals/signed-in">&larr; Back Home</a>
+  
+<div>
+  <h2>Past Entries:</h2>
+  </div>
+  
+  
+  <h2>Search:</h2>
+  <form method="POST" action="/journals/results">
+      <input type="text" id="search" name="search" value="">
+      <button type="submit">Search</button>
+  </form>
+  
+  
+  
+  <% journals.forEach(function(j) { %>
     
-      <a href="/journals/<%= j.id %>"><%= j.subject %></a>
-    
-    <h3>
-      <small><%= j.entry %> </small>
-    </h3>
-    </div>
-      <form method="POST" action="/journals/<%=j.id%>?_method=DELETE">
-        <button type="submit" class="btn btn-primary">Delete</button>
+    <div class="container">
+      <div class="d-flex flex-column">
+        <a href="/journals/<%= j.id %>"><%= j.subject %></a>
+        </div>
+        </div>
+
+        <div class="container">  
+          <h3>
+            <div class="d-flex flex-column">
+            <small><%= j.entry %> </small>
+            </div>
+          </h3>
+        </div>
+   
+      <form method="POST" action="/journals/favorites">
+        <input type="text" value="<%= journals.subject%>" name="subject" hidden>
+        <input type="text" value="<%= journals.quote %>" name="quote" hidden>
+        <input type="text" value="<%= journals.entry %>" name="entry" hidden> 
+        <div class="button">
+          <button type="submit" class="btn btn-primary">Add to Favorites</button>
+        </div>
       </form> 
-    <a href="/journals/edit/<%= j.id %> ">Edit</a>
+        <form method="POST" action="/journals/<%=j.id%>?_method=DELETE">
+          <div class="button">
+            <button type="submit" class="btn btn-primary">Delete</button>
+          </div>
+        </form> 
+        <div class ="edit">
+          <a href="/journals/edit/<%= j.id %> ">Edit</a>
+        </div>
+    <% }) %>
+ 
+    <h4>
 
-    <form action="/journals/favorites" method="POST">
-      <input type="text" value="<%= j.subject%>"
-      <input type="text" value="<%= j.quote %>"
-      <input type="text" value="<%= j.entry %>" 
-      <button type="submit" class="btn btn-primary">Add to Favorites</button>
-    </form> 
-  
-  <% }) %>
-
-
+      <div class="favorite">
+        <a href="/journals/favorites">Favorite Journals</a>
+      </div>
+    </h4>
+  </div>
+</body>
+</html>

@@ -1,0 +1,18 @@
+body {
+    font-family: 'Libre Baskerville', sans-serif;
+    font-size: 70%;
+    /* background-image: url('blurred-garden.jpeg'); */
+    background-color: rgba(122, 160, 153, 0.48);
+  }
+  a {
+      color: #0d8ba1;
+      -webkit-transition: all 0.25s ease-out;
+      -moz-transition: all 0.25s ease-out;
+      transition: all 0.25s ease-out;
+      text-decoration: none;
+      font-size:20px;
+  }
+  body {
+    font-family: 'Libre Baskerville', sans-serif;
+    font-size: 70%;
+  }    
