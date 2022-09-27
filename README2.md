@@ -22,8 +22,7 @@ the app, upon creation of a new user, the data will be stored in the users table
 ![Screen Shot 2022-09-26 at 10 22 10 PM](https://user-images.githubusercontent.com/96893640/192416588-16a93719-408e-48b3-b100-a788d73785ac.png)
 
 ### User Model:
-![Screen Shot 2022-09-26 at 10 24 17 PM](https://user-images.githubusercontent.com/96893640/192416864-fae68d86-d1da-4d6b-89bb-6518fb12bafb.png)
-
+![Screen Shot 2022-09-26 at 11 32 04 PM](https://user-images.githubusercontent.com/96893640/192425576-2a2b321c-c3ba-4c25-8653-45bae1d35a5a.png)
 
 ## Home Screen:
 
