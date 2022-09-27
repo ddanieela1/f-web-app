@@ -25,11 +25,12 @@ the app, upon creation of a new user, the data will be stored in the users table
 ![Screen Shot 2022-09-26 at 11 32 04 PM](https://user-images.githubusercontent.com/96893640/192425576-2a2b321c-c3ba-4c25-8653-45bae1d35a5a.png)
 
 ## Home Screen:
+![Screen Shot 2022-09-27 at 7 24 11 PM](https://user-images.githubusercontent.com/96893640/192654678-effae6d0-b560-487e-8595-53acf4778ac8.png)
 
 
 ## Creating A New Entry:
+![Screen Shot 2022-09-27 at 7 24 24 PM](https://user-images.githubusercontent.com/96893640/192654637-1d6acca3-de21-402c-80a6-10a41cf87f26.png)
 
-## All Entries:
 
 ## Code Breakdown:
 The app consists of one server file with the following dependencies imported:
