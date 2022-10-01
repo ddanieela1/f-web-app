@@ -75,7 +75,8 @@ app.put('/profile/:id', isLoggedIn, async (req, res) => {
 
 //access to all of our auth routes GET/auth/signup POST routes
 app.use('/auth', require('./controllers/auth'));
-app.use('/journals', isLoggedIn, require('./controllers/journals'));
+app.use('/journals',  require('./controllers/journals'));
+app.use('/comments', require('./controllers/comments'));
 
 // Add this above /auth controllers
 app.get('/profile', isLoggedIn, (req, res) => {

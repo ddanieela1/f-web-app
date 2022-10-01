@@ -70,13 +70,31 @@ router.get("/edit/:id", (req, res) => {
     });
 });
 
+router.get("/:id", (req, res) => {
+  db.journal
+    .findOne({
+      where: { id: req.params.id },
+      include: [db.user],
+    })
+    .then((journals) => {
+      res.render("journals/show", { journals });
+    })
+    .catch((error) => {
+      res.render("journals/signed-in");
+    });
+});
+
+router.get('/search', (req, res) => {
+  res.render('journals/search');
+});
+
 router.post("/results", async (req, res) => {
 
   const options = {
     params: { q: req.body.search },
   };
   const response = await db.journals.findAll(options);
-  res.render("journals/results", { journals:response.data.journals });
+  res.render("journals/results", { journals:journals });
 });
 
 //post favorite entry
@@ -92,19 +110,6 @@ router.post("/favorites", async (req, res) => {
   res.redirect("/favorites");
 });
 
-router.get("/:id", (req, res) => {
-  db.journal
-    .findOne({
-      where: { id: req.params.id },
-      include: [db.user],
-    })
-    .then((journals) => {
-      res.render("journals/show", { journals });
-    })
-    .catch((error) => {
-      res.render("journals/signed-in");
-    });
-});
 
 //post one individual entry
 router.post("/new", (req, res) => {

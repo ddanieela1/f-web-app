@@ -1,0 +1,15 @@
+<h1>Create a new post</h1>
+
+<form action="/comments/new" method="POST">
+  <div class="form-group">
+    <label for="subject">Subject</label>
+    <input type="text" class="form-control" id="subject" name="subject" required>
+  </div>
+
+  <div class="form-group">
+    <label for="comment">Comment</label>
+    <textarea type="text" class="form-control" id="comment" name="comment" required></textarea>
+  </div>
+
+  <input type="submit" class="btn btn-primary">
+</form>
