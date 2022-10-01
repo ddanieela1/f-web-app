@@ -1,4 +1,5 @@
 const { default: axios } = require("axios");
+const { response } = require("express");
 const express = require("express");
 const router = express.Router();
 const passport = require("../config/ppConfig");
@@ -69,17 +70,26 @@ router.get("/edit/:id", (req, res) => {
     });
 });
 
+router.post("/results", async (req, res) => {
+
+  const options = {
+    params: { q: req.body.search },
+  };
+  const response = await db.journals.findAll(options);
+  res.render("journals/results", { journals:response.data.journals });
+});
+
 //post favorite entry
 router.post("/favorites", async (req, res) => {
-const favJournal= db.journal
-    .create({
-      subject: req.body.subject,
-      quote: req.body.quote,
-      entry: req.body.entry,
-      userId: req.user.id
-    });
-    // res.redirect to all favorite songs
-    res.redirect('/favorites');
+  const favJournal = db.journal.create({
+    subject: req.body.subject,
+    quote: req.body.quote,
+    entry: req.body.entry,
+    userId: req.user.id,
+  });
+
+  // res.redirect to all favorite songs
+  res.redirect("/favorites");
 });
 
 router.get("/:id", (req, res) => {
@@ -106,7 +116,7 @@ router.post("/new", (req, res) => {
       entry: req.body.entry,
     })
     .then((post) => {
-      res.redirect("/journals"); //or '/show' route
+      res.redirect("/journals");
     })
     .catch((error) => {
       res.render("journals/new");
@@ -124,10 +134,9 @@ router.post("/signed-in", (req, res) => {
       res.redirect("/journals");
     })
     .catch((error) => {
-      res.render("journals/signed");
+      res.render("journals/404");
     });
 });
-
 
 router.put("/:id", async (req, res) => {
   try {
@@ -150,7 +159,6 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-
 //delete
 router.delete("/:id", async (req, res) => {
   let quoteDeleted = await db.journal.destroy({
@@ -158,5 +166,10 @@ router.delete("/:id", async (req, res) => {
   });
   res.redirect("/journals");
 });
+
+
+router.get('*', (req, res) => {
+  res.render('404');
+})
 
 module.exports = router;
