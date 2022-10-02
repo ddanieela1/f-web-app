@@ -6,6 +6,14 @@ The idea from this project came to me once I found the API that I wanted to use 
 a private space in which the user can have an online journal, create new entries and keep record of all the entries. This app was created with the 
 implementation of Express,Javascript, HTML, CSS, Bootstap and PSQL.
 
+## Installation Instructions:
+1.Git clone https://github.com/romebell/f-web-app.git
+2.cd supreme-engine
+3.npm install
+4.Touch .env
+5.Add inside .env the "SECRET_SESSION"
+6.Retrieve API Key from Rapid API and store inside .env with the variable of "API_KEY"
+
 ## Wireframe:
 ![IMG_D5B384B4EB94-1](https://user-images.githubusercontent.com/96893640/192419204-5fb64f39-e223-49a7-b508-9e53f5262bfd.jpeg)
 
