@@ -7,7 +7,7 @@ html, body {
   margin: 0;
 }
 body {
-  background: url("blurred-garden.jpeg");
+  background-image: url("blurred-garden.jpeg");
   font-family: 'Libre Baskerville', sans-serif;
   font-size: 70%;
 }

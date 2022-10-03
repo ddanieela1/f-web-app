@@ -1,9 +1,0 @@
-<h1>Results</h1>
-<form method="get" action="/journals/search">
-    <button type="submit">Back to Search</button>
-</form>
-
-<% journals.forEach((journal) => { %>
-    <h2><%= journal.result.subject %> </h2>
-    <h3><%= journal.result.entry %> </h3>
-    <% }) %>
