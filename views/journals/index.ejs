@@ -35,15 +35,15 @@
             </div>
           </h3>
         </div>
-   
-      <form method="POST" action="/journals/favorites">
-        <input type="text" value="<%= journals.subject%>" name="subject" hidden>
-        <input type="text" value="<%= journals.quote %>" name="quote" hidden>
-        <input type="text" value="<%= journals.entry %>" name="entry" hidden> 
-        <div class="button">
-          <button type="submit" class="btn btn-primary">Add to Favorites</button>
-        </div>
-      </form> 
+   <% if(!j.favorite) { %>
+     <form method="POST" action="/journals/<%=j.id%>/favorites?_method=PUT">
+       <input type="text" value="<%= j.favorite %>" name="favorite" hidden> 
+       <div class="button">
+         <button type="submit" class="btn btn-primary">Add to Favorites</button>
+       </div>
+     </form> 
+
+   <% } %> 
         <form method="POST" action="/journals/<%=j.id%>?_method=DELETE">
           <div class="button">
             <button type="submit" class="btn btn-primary">Delete</button>

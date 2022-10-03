@@ -8,7 +8,7 @@ const passport = require('./config/ppConfig');
 const isLoggedIn = require('./middleware/isLoggedIn');
 const axios = require('axios');
 const methodOverride = require('method-override');
-const db = ("./models")
+const db = require("./models")
 
 const SECRET_SESSION = process.env.SECRET_SESSION;
 console.log('hi', SECRET_SESSION);
@@ -74,9 +74,9 @@ app.put('/profile/:id', isLoggedIn, async (req, res) => {
 });
 
 //access to all of our auth routes GET/auth/signup POST routes
-app.use('/auth', require('./controllers/auth'));
-app.use('/journals',  require('./controllers/journals'));
-app.use('/comments', require('./controllers/comments'));
+app.use('/auth',require('./controllers/auth'));
+app.use('/journals', isLoggedIn, require('./controllers/journals'));
+app.use('/notes', isLoggedIn,require('./controllers/notes'));
 
 // Add this above /auth controllers
 app.get('/profile', isLoggedIn, (req, res) => {
@@ -84,7 +84,9 @@ app.get('/profile', isLoggedIn, (req, res) => {
   res.render('profile', { id, name, email });
 });
 
-
+app.get('*', (req, res) => {
+  res.render('404');
+})
 
 const PORT = process.env.PORT || 3000;
 const server = app.listen(PORT, () => {

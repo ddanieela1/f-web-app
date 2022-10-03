@@ -1,39 +1,31 @@
 {
-  "name": "express_authentication",
+  "name": "f-web-app",
   "version": "1.0.0",
   "description": "Express authentication template using Passport + Flash messages + custom middleware",
-  "main": "server.js",
+  "main": "api.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "mocha",
-    "start": "node server.js",
-    "nodemon": "nodemon"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SEIRFX-621/express_authentication.git"
+    "url": "git+https://github.com/ddanieela1/f-web-app.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/SEIRFX-621/express_authentication/issues"
+    "url": "https://github.com/ddanieela1/f-web-app/issues"
   },
-  "homepage": "https://github.com/SEIRFX-621/express_authentication#readme",
-  "devDependencies": {
-    "chai": "^4.3.6",
-    "mocha": "^10.0.0",
-    "supertest": "^6.2.4"
-  },
+  "homepage": "https://github.com/ddanieela1/f-web-app#readme",
   "dependencies": {
-    "@ngneat/falso": "^6.1.0",
     "axios": "^0.27.2",
     "bcryptjs": "^2.4.3",
-    "bootstrap": "^5.2.1",
     "connect-flash": "^0.1.1",
-    "dotenv": "^16.0.2",
+    "dotenv": "^16.0.3",
     "ejs": "^3.1.8",
     "express": "^4.18.1",
     "express-ejs-layouts": "^2.5.1",
@@ -43,8 +35,6 @@
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "pg": "^8.8.0",
-    "pg-hstore": "^2.3.4",
-    "sequelize": "^6.21.6",
-    "sequelize-cli": "^6.5.1"
+    "sequelize": "^6.23.2"
   }
 }

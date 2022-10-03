@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     quote: DataTypes.STRING,
     userId: DataTypes.INTEGER,
     entry: DataTypes.STRING,
+    favorite: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'journal',

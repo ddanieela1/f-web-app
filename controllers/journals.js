@@ -1,10 +1,11 @@
 const { default: axios } = require("axios");
-const { response } = require("express");
 const express = require("express");
 const router = express.Router();
-const passport = require("../config/ppConfig");
+const isLoggedIn = require("../middleware/isLoggedIn")
+const {Op} = require("sequelize");
 //import db
 const db = require("../models");
+
 
 //homepage that shows quotes
 router.get("/signed-in", (req, res) => {
@@ -32,7 +33,7 @@ router.get("/signed-in", (req, res) => {
 });
 
 //leads to past entries
-router.get("/", (req, res) => {
+router.get("/", isLoggedIn,(req, res) => {
   db.journal
     .findAll()
     .then((journals) => {
@@ -44,19 +45,29 @@ router.get("/", (req, res) => {
 });
 
 //list of favorite entries
-router.get("/favorites", (req, res) => {
-  db.journal.findAll().then((journals) => {
+router.get("/favorites", isLoggedIn,(req, res) => {
+  db.journal.findAll({
+    where: { 
+      [Op.and]:[
+        {userId: req.user.id},
+        {favorite: true}
+      ]
+    }
+  }).then((journals) => {
     res.render("journals/favorites", { journals: journals });
+  })
+  .catch((err) => {
+    res.render("./404")
   });
 });
 
 //open journal in a new page for a bigger view
-router.get("/new", (req, res) => {
+router.get("/new", isLoggedIn,(req, res) => {
   res.render("journals/new");
 });
 
 //edit
-router.get("/edit/:id", (req, res) => {
+router.get("/edit/:id", isLoggedIn, (req, res) => {
   db.journal
     .findOne({
       where: { id: req.params.id },
@@ -70,7 +81,7 @@ router.get("/edit/:id", (req, res) => {
     });
 });
 
-router.get("/:id", (req, res) => {
+router.get("/:id", isLoggedIn, (req, res) => {
   db.journal
     .findOne({
       where: { id: req.params.id },
@@ -84,11 +95,11 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.get('/search', (req, res) => {
+router.get('/search', isLoggedIn,(req, res) => {
   res.render('journals/search');
 });
 
-router.post("/results", async (req, res) => {
+router.post("/results", isLoggedIn, async (req, res) => {
 
   const options = {
     params: { q: req.body.search },
@@ -98,16 +109,19 @@ router.post("/results", async (req, res) => {
 });
 
 //post favorite entry
-router.post("/favorites", async (req, res) => {
-  const favJournal = db.journal.create({
-    subject: req.body.subject,
-    quote: req.body.quote,
-    entry: req.body.entry,
-    userId: req.user.id,
+router.put("/:id/favorites", isLoggedIn, async (req, res) => {
+  const { favorite } = req.body;
+  db.journal.update({
+    favorite: favorite? false: true,
+  },{
+    where: {id: parseInt(req.params.id)}
+  })
+  .then((post) => {
+    res.redirect("/journals/favorites");
+  })
+  .catch((error) => {
+    res.render("./404");
   });
-
-  // res.redirect to all favorite songs
-  res.redirect("/favorites");
 });
 
 
@@ -139,7 +153,7 @@ router.post("/signed-in", (req, res) => {
       res.redirect("/journals");
     })
     .catch((error) => {
-      res.render("journals/404");
+      res.render("./404");
     });
 });
 
@@ -165,7 +179,7 @@ router.put("/:id", async (req, res) => {
 });
 
 //delete
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", isLoggedIn, async (req, res) => {
   let quoteDeleted = await db.journal.destroy({
     where: { id: req.params.id },
   });
@@ -173,8 +187,5 @@ router.delete("/:id", async (req, res) => {
 });
 
 
-router.get('*', (req, res) => {
-  res.render('404');
-})
 
 module.exports = router;

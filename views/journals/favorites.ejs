@@ -3,7 +3,19 @@
 <a href="/journals/">&larr; Back to Entries</a>
 
 <h1>Favorite Journals:</h1>
+<%if(journals && Array.isArray(journals)){%>
+<% journals.forEach(function(j) { %>
+    <h1><%= j.subject %> </h1>
+    <h1><%= j.quote %> </h1>
+    <h1><%= j.entry %> </h1>
 
-<h1><%= journals.subject %> </h1>
-<h1><%= journals.quote %> </h1>
-<h1><%= journals.entry %> </h1>
+    <form method="POST" action="/journals/<%=j.id%>/favorites?_method=PUT">
+        <input type="text" value="<%= j.favorite %>" name="favorite" hidden> 
+        <div class="button">
+          <button type="submit" class="btn btn-primary">Remove</button>
+        </div>
+      </form> 
+      
+      
+      <% }) %>
+      <%}%>

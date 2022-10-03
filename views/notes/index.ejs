@@ -1,0 +1,32 @@
+<div>
+  <h2>All Reminders:</h2>
+</div>
+
+<% notes.forEach(function(n) { %>
+
+<div class="container">
+  <div class="d-flex flex-column">
+    <a href="/notes/<%= n.id %>"><%= n.subject %></a>
+  </div>
+</div>
+
+<div class="container">
+  <h3>
+    <div class="d-flex flex-column">
+      <small><%= n.note %> </small>
+    </div>
+  </h3>
+</div>
+
+<!-- *************************DELETE**************************** -->
+
+<form method="POST" action="/notes/<%=n.id%>?_method=DELETE">
+  <div class="button">
+    <button type="submit" class="btn btn-primary">Delete</button>
+  </div>
+</form> 
+
+
+<% }) %>
+
+<a href="/journals/signed-in">Back to journals</a>

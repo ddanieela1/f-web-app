@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
   class user extends Model {
     static associate(models) {
       models.user.hasMany(models.journal)
+      models.user.hasMany(models.note)
     }
   }
   user.init({
