@@ -7,37 +7,48 @@ a private space in which the user can have an online journal, create new entries
 implementation of Express,Javascript, HTML, CSS, Bootstap and PSQL.
 
 ## Installation Instructions:
-1.Git clone https://github.com/romebell/f-web-app.git
-2.cd supreme-engine
-3.npm install
-4.Touch .env
-5.Add inside .env the "SECRET_SESSION"
-6.Retrieve API Key from Rapid API and store inside .env with the variable of "API_KEY"
+1.Git clone https://github.com/ddanieela1/f-web-app
+
+2.Change directory in the terminal (cd f-webb-app)
+
+3.Run npm install in the terminal
+
+4.Run npm start or nodemon in the terminal to start the app
+
+## Deployment Link:
+https://my-priv-journal.herokuapp.com/
 
 ## Wireframe:
-![IMG_D5B384B4EB94-1](https://user-images.githubusercontent.com/96893640/192419204-5fb64f39-e223-49a7-b508-9e53f5262bfd.jpeg)
+![IMG_28FFB5DC6A0B-1](https://user-images.githubusercontent.com/96893640/193943501-ad411ee9-23cd-4739-9e66-562e0feb2600.jpeg)
 
 
-## Associations:
-![IMG_EA1B9BF3F612-1](https://user-images.githubusercontent.com/96893640/192418261-5890540d-f97c-4051-ac64-e37c522a987e.jpeg)
+## ERD:
+![IMG_78272DA07424-1](https://user-images.githubusercontent.com/96893640/193940471-3aa239b9-93ff-42ff-b8ac-cfbf2c1f7b10.jpeg)
+
 
 ## Database:
 This project consisted of a database that included two models, "journal" and "user". The journal model contained all the data from the users entries,
 upon creation of a journal entry new data will be stored in the journals table in the database. The users model contained the users that log in to use 
 the app, upon creation of a new user, the data will be stored in the users table in the database. The "user" model has a one to many relationship with the
 "journal" model, since one user can create multiple entries.
-### Journal Model:
-![Screen Shot 2022-09-26 at 10 22 10 PM](https://user-images.githubusercontent.com/96893640/192416588-16a93719-408e-48b3-b100-a788d73785ac.png)
 
-### User Model:
-![Screen Shot 2022-09-26 at 11 32 04 PM](https://user-images.githubusercontent.com/96893640/192425576-2a2b321c-c3ba-4c25-8653-45bae1d35a5a.png)
+
+### Models:
+![Screen Shot 2022-10-04 at 7 08 13 PM](https://user-images.githubusercontent.com/96893640/193947142-818d3187-f097-49f8-9266-de6daec231b0.png)
+
+![Screen Shot 2022-10-04 at 7 07 59 PM](https://user-images.githubusercontent.com/96893640/193947150-d5751a8c-37b3-497b-99dc-4f29c7c13330.png)
+
+![Screen Shot 2022-10-04 at 7 12 49 PM](https://user-images.githubusercontent.com/96893640/193947314-fb47e385-1d45-4aa3-9d3b-9c784a854e1b.png)
+
 
 ## Home Screen:
-![Screen Shot 2022-09-27 at 7 24 11 PM](https://user-images.githubusercontent.com/96893640/192654678-effae6d0-b560-487e-8595-53acf4778ac8.png)
-
+![Screen Shot 2022-10-04 at 7 15 33 PM](https://user-images.githubusercontent.com/96893640/193947786-7f444f55-5060-4224-8de8-c948985f717d.png)
 
 ## Creating A New Entry:
 ![Screen Shot 2022-09-27 at 7 24 24 PM](https://user-images.githubusercontent.com/96893640/192654637-1d6acca3-de21-402c-80a6-10a41cf87f26.png)
+
+## Adding A Reminder:
+![Screen Shot 2022-10-04 at 7 15 55 PM](https://user-images.githubusercontent.com/96893640/193947813-fdc7c631-35f3-4893-9772-6c516fc22cab.png)
 
 
 ## Code Breakdown:
